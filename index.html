@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>んほぉ！</title>
+<style type="text/css">
+<!--
+  .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+  }
+
+  .num_tens {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 96px;
+    left: -260px;
+  }
+
+  .num_ones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 96px;
+    left: -230px;
+  }
+
+  .reset {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+  }
+-->
+</style>
+</head>
+
+<body>
+<main>
+  <div class="button">
+  <img id="button" src="res/button_onoff1.png" width="400" height="300" onclick="button_onclick()">
+    <div class="num_tens">
+        <img id="num_tens" src="res/number_null.png"  width="52" height="76">
+    </div>
+    <div class="num_ones">
+        <img id="num_ones" src="res/number_digtal0.png"  width="52" height="76">
+    </div>
+  </div>
+  <div class="reset">
+      <input type="button" style="width:150px;height:50px;font-size:2em;" value="RESET" onclick="reset_onclick()">
+  </div>
+</main>
+
+<script>
+  var tens_src = new Array("res/number_null.png","res/number_digtal1.png");
+  var ones_src = new Array( "res/number_digtal0.png",
+                            "res/number_digtal1.png",
+                            "res/number_digtal2.png",
+                            "res/number_digtal3.png",
+                            "res/number_digtal4.png",
+                            "res/number_digtal5.png",
+                            "res/number_digtal6.png",
+                            "res/number_digtal7.png",
+                            "res/number_digtal8.png",
+                            "res/number_digtal9.png"
+                            );
+  var num = 0;
+  var audioElem;
+
+  function button_onclick(){
+      document.getElementById("button").src="res/button_onoff2.png";
+      if(num <= 17){
+        num = num + 1;
+        audioElem = new Audio();
+        audioElem.src = "res/nho.mp3";
+        audioElem.play();
+      }
+      else if(num == 18){
+        num = num + 1;
+        audioElem = new Audio();
+        audioElem.src = "res/nhoo.mp3";
+        audioElem.play();
+      }
+      else{
+        // 19 and above
+        // do nothing
+      }
+
+      update_number();
+
+      setTimeout("button_release()",50);
+  }
+  function button_release(){
+    document.getElementById("button").src="res/button_onoff1.png";
+  }
+  function reset_onclick(){
+    num = 0;
+    update_number();
+  }
+
+  function update_number(){
+    var ones = num % 10;
+    var tens = parseInt(num / 10);
+    document.getElementById("num_tens").src=tens_src[tens];
+    document.getElementById("num_ones").src=ones_src[ones];
+  }
+
+</script>
+</body>
+</html>
