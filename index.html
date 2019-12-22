@@ -17,13 +17,19 @@
       position: relative;
   }
 
+  .numbers {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+  }
   .num_tens {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 96px;
-    left: -260px;
+    top: -94px;
+    left: -20px;
   }
 
   .num_ones {
@@ -31,8 +37,8 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 96px;
-    left: -230px;
+    top: -94px;
+    left: 20px;
   }
 
   .reset {
@@ -50,6 +56,9 @@
 <main>
   <div class="button">
   <img id="button" src="res/button_onoff1.png" width="400" height="300" onclick="button_onclick()">
+  </div>
+  <!--numbersは、真下に並べちゃってから、cssで上にずらして重ねることにした。 -->
+  <div class="numbers">
     <div class="num_tens">
         <img id="num_tens" src="res/number_null.png"  width="52" height="76">
     </div>
@@ -57,6 +66,8 @@
         <img id="num_ones" src="res/number_digtal0.png"  width="52" height="76">
     </div>
   </div>
+
+  <p align="center" style="font-size:2em;"">※音が出ます、ご注意ください</p>
   <div class="reset">
       <input type="button" style="width:150px;height:50px;font-size:2em;" value="RESET" onclick="reset_onclick()">
   </div>
