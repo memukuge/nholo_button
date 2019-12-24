@@ -89,19 +89,17 @@
                             "res/number_digtal9.png"
                             );
   var num = 0;
-  var audio_nho;
+  var audio_nho = new Array(4);
   var audio_nhoo;
 
-  audio_nho =new Audio();
+  for(var i=0;i<4;i++){
+  audio_nho[i] =new Audio();
+  audio_nho[i].preload = "auto";
+  audio_nho[i].src = "res/nho.mp3";
+  audio_nho[i].load();
+  }
   audio_nhoo =new Audio();
-
-  audio_nho.preload = "auto";
   audio_nhoo.preload = "auto";
-
-
-  audio_nho.src = "res/nho.mp3";
-  audio_nho.load();
-
   audio_nhoo.src = "res/nhoo.mp3";
   audio_nhoo.load();
 
@@ -110,8 +108,8 @@
       document.getElementById("button").src="res/button_onoff2.png";
       if(num <= 17){
         num = num + 1;
-        audio_nho.currentTime = 0;
-        audio_nho.play();
+        audio_nho[num%4].currentTime = 0;
+        audio_nho[num%4].play();
       }
       else if(num == 18){
         num = num + 1;
