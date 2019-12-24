@@ -89,21 +89,34 @@
                             "res/number_digtal9.png"
                             );
   var num = 0;
-  var audioElem;
+  var audio_nho;
+  var audio_nhoo;
+
+  audio_nho =new Audio();
+  audio_nhoo =new Audio();
+
+  audio_nho.preload = "auto";
+  audio_nhoo.preload = "auto";
+
+
+  audio_nho.src = "res/nho.mp3";
+  audio_nho.load();
+
+  audio_nhoo.src = "res/nhoo.mp3";
+  audio_nhoo.load();
+
 
   function button_onclick(){
       document.getElementById("button").src="res/button_onoff2.png";
       if(num <= 17){
         num = num + 1;
-        audioElem = new Audio();
-        audioElem.src = "res/nho.mp3";
-        audioElem.play();
+        audio_nho.currentTime = 0;
+        audio_nho.play();
       }
       else if(num == 18){
         num = num + 1;
-        audioElem = new Audio();
-        audioElem.src = "res/nhoo.mp3";
-        audioElem.play();
+        audio_nhoo.currentTime = 0;
+        audio_nhoo.play();
       }
       else{
         // 19 and above
