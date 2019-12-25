@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" user-scalable=no>
+<title>んほぉ！</title>
+<style type="text/css">
+<!--
+
+  html {
+  touch-action: manipulation;
+  }
+
+  .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+  }
+
+  .numbers {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+  }
+  .num_hunds {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -94px;
+    left: -60px;
+  }
+
+  .num_tens {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -94px;
+    left: -30px;
+  }
+
+  .num_ones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -94px;
+    left: 0px;
+  }
+
+  .reset {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+  }
+-->
+</style>
+</head>
+
+<body>
+<main>
+  <div class="button">
+  <img id="button" src="res/button_onoff1.png" width="400" height="300" onclick="button_onclick()">
+  </div>
+  <!--numbersは、真下に並べちゃってから、cssで上にずらして重ねることにした。 -->
+  <div class="numbers">
+
+    <div class="num_hunds">
+        <img id="num_hunds" src="res/number_null.png"  width="52" height="76">
+    </div>
+    <div class="num_tens">
+        <img id="num_tens" src="res/number_null.png"  width="52" height="76">
+    </div>
+    <div class="num_ones">
+        <img id="num_ones" src="res/number_digtal0.png"  width="52" height="76">
+    </div>
+  </div>
+
+  <p align="center" style="font-size:2em;"">※音が出ます、ご注意ください</p>
+  <div class="reset">
+      <input type="button" style="width:150px;height:50px;font-size:2em;" value="RESET" onclick="reset_onclick()">
+  </div>
+</main>
+
+<script>
+
+
+  var tens_src = new Array( "res/number_null.png",
+                            "res/number_digtal1.png",
+                            "res/number_digtal2.png",
+                            "res/number_digtal3.png",
+                            "res/number_digtal4.png",
+                            "res/number_digtal5.png",
+                            "res/number_digtal6.png",
+                            "res/number_digtal7.png",
+                            "res/number_digtal8.png",
+                            "res/number_digtal9.png");
+  var ones_src = new Array( "res/number_digtal0.png",
+                            "res/number_digtal1.png",
+                            "res/number_digtal2.png",
+                            "res/number_digtal3.png",
+                            "res/number_digtal4.png",
+                            "res/number_digtal5.png",
+                            "res/number_digtal6.png",
+                            "res/number_digtal7.png",
+                            "res/number_digtal8.png",
+                            "res/number_digtal9.png"
+                            );
+  var num = 0;
+  var audio_nho = new Array(4);
+  var audio_nhoo = new Array(4);
+
+  for(var i=0;i<4;i++){
+  audio_nho[i] =new Audio();
+  audio_nho[i].preload = "auto";
+  audio_nho[i].src = "res/nho.mp3";
+  audio_nho[i].load();
+  audio_nhoo[i] =new Audio();
+  audio_nhoo[i].preload = "auto";
+  audio_nhoo[i].src = "res/nhoo.mp3";
+  audio_nhoo[i].load();
+  }
+
+  function button_onclick(){
+      document.getElementById("button").src="res/button_onoff2.png";
+      if(num < 999){
+        num = num + 1;
+      }
+
+      if(num%3==0){
+        audio_nhoo[num%4].currentTime = 0;
+        audio_nhoo[num%4].play();
+      }
+      else if(num%10 == 3 || parseInt(num % 100 / 10) ==3 || parseInt(num / 100)==3){
+        audio_nhoo[num%4].currentTime = 0;
+        audio_nhoo[num%4].play();
+      }
+      else{
+        audio_nho[num%4].currentTime = 0;
+        audio_nho[num%4].play();
+      }
+
+      update_number();
+
+      setTimeout("button_release()",50);
+  }
+  function button_release(){
+    document.getElementById("button").src="res/button_onoff1.png";
+  }
+  function reset_onclick(){
+    num = 0;
+    update_number();
+  }
+
+  function update_number(){
+    var hunds = parseInt(num/100);
+    var ones = num % 10;
+    var tens = parseInt(num % 100 / 10);
+    if(num<100){
+      document.getElementById("num_tens").src=tens_src[tens];
+    }
+    else{
+      document.getElementById("num_tens").src=ones_src[tens];
+    }
+    document.getElementById("num_ones").src=ones_src[ones];
+    document.getElementById("num_hunds").src=tens_src[hunds];
+  }
+
+</script>
+</body>
+</html>
